@@ -23,10 +23,8 @@ public class ApiUtils {
     public Stock getStock(String symbol) {
         if(!symbol.contains(".TW")) symbol += ".TW";
         String url = apiProperties.getUrl() + symbol;
-        Stock stock = null;
         try {
-            stock = restTemplate.getForObject(url, Stock.class);
-            return stock;
+            return restTemplate.getForObject(url, Stock.class);
         } catch (HttpClientErrorException.NotFound e) {
             throw new ApiErrorException(e.getMessage());
         }
